@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.obama.school">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/cycu"
+        android:label="Mr.EVENT"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme.NoActionBar">
+        <activity
+            android:name=".login"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Activity_list"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".main_menu"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".student_center"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".point"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".history_point"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gift_box"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gift"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gift_item"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".qrcode"
+            android:screenOrientation="portrait" />
+
+        <service
+            android:name=".MyService"
+            android:enabled="true" />
+
+        <activity
+            android:name=".scanner"
+            android:screenOrientation="portrait" />
+        <activity android:name=".notification"></activity>
+    </application>
+
+</manifest>
