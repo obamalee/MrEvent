@@ -1,5 +1,7 @@
 package com.example.obama.school;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -21,11 +23,19 @@ import java.util.Map;
 
 public class qrcode extends AppCompatActivity {
 
+    //session
+    public static final String MyPREFERENCES = "MyPrefs" ;
+    public static String stu_id = "stu_idlKey";
+    SharedPreferences sharedpreferences;
+    String my_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.qrcode);
+        //抓取 mb_id
+        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        my_id = sharedpreferences.getString(stu_id, "F");
 
 
         ImageButton imageButton1 = (ImageButton) findViewById(R.id.imageButton1);
@@ -38,7 +48,7 @@ public class qrcode extends AppCompatActivity {
         });
 
         // QR code 的內容
-        String QRCodeContent = "1";
+        String QRCodeContent = my_id;
         // QR code 寬度
         int QRCodeWidth = 200;
         // QR code 高度

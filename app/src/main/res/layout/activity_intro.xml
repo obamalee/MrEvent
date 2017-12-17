@@ -3,6 +3,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#cccccc"
     android:orientation="vertical">
 
     <ScrollView
@@ -12,53 +13,107 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dip"
-            android:layout_marginRight="10dip"
+            android:layout_marginLeft="0dip"
+            android:layout_marginRight="0dip"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textView12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="35dip"
+                android:layout_marginLeft="3dip"
+                android:layout_marginRight="3dip"
+                android:layout_marginTop="5dip"
+                android:background="#FFFFFF"
+                android:paddingBottom="15dip"
+                android:paddingLeft="10dip"
+                android:paddingTop="15dip"
                 android:text=""
                 android:textColor="#333333"
-                android:textSize="22sp" />
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dip"
+                android:layout_marginRight="3dip"
+                android:layout_marginTop="5dip"
+                android:background="#FFFFFF"
+                android:paddingBottom="8dip"
+                android:paddingLeft="10dip"
+                android:paddingTop="15dip"
+                android:text="|時間|："
+                android:textColor="#333333"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/textView17"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="35dip"
-                android:text="11/15(三) 18:00-20:00"
+                android:background="#FFFFFF"
+                android:paddingBottom="15dip"
+                android:paddingLeft="10dip"
+                android:layout_marginLeft="3dip"
+                android:layout_marginRight="3dip"
+                android:text=""
                 android:textColor="#333333"
-                android:textSize="22sp" />
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textView22"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dip"
+                android:layout_marginRight="3dip"
+                android:layout_marginTop="5dip"
+                android:background="#FFFFFF"
+                android:paddingBottom="8dip"
+                android:paddingLeft="10dip"
+                android:paddingTop="15dip"
+                android:text="|地點|："
+                android:textColor="#333333"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/textView18"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dip"
-                android:text="地點: 全人村4樓國際會議廳"
+                android:background="#FFFFFF"
+                android:paddingBottom="15dip"
+                android:paddingLeft="10dip"
+                android:layout_marginLeft="3dip"
+                android:layout_marginRight="3dip"
+                android:text=""
                 android:textColor="#333333"
-                android:textSize="22sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/textView19"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dip"
-                android:layout_marginTop="40dip"
+                android:layout_marginLeft="3dip"
+                android:layout_marginRight="3dip"
+                android:layout_marginTop="5dip"
+                android:background="#FFFFFF"
+                android:paddingBottom="10dip"
+                android:paddingLeft="10dip"
+                android:paddingTop="15dip"
                 android:text="|節目簡介|"
                 android:textColor="#333333"
-                android:textSize="18sp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/textView20"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="#FFFFFF"
+                android:paddingBottom="15dip"
+                android:paddingLeft="10dip"
+                android:layout_marginLeft="3dip"
+                android:layout_marginRight="3dip"
                 android:textColor="#333333"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

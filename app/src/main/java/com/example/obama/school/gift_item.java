@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Looper;
@@ -25,6 +26,11 @@ import java.util.Date;
 import static java.lang.Integer.parseInt;
 
 public class gift_item extends AppCompatActivity {
+    //session
+    public static final String MyPREFERENCES = "MyPrefs" ;
+    public static String stu_id = "stu_idlKey";
+    SharedPreferences sharedpreferences;
+    String my_id;
 
     String gift_id;
     String name;
@@ -35,6 +41,10 @@ public class gift_item extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gift_item);
+
+        //抓取 mb_id
+        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        my_id = sharedpreferences.getString(stu_id, "F");
 
         ImageButton imageButton1 = (ImageButton) findViewById(R.id.imageButton1);
         imageButton1.setOnClickListener(new Button.OnClickListener() {
@@ -84,7 +94,7 @@ public class gift_item extends AppCompatActivity {
                             public void run() {
 
                                 try {
-                                    final String result = DBConnector.executeQuery("SELECT * FROM student WHERE stu_id = '1'");
+                                    final String result = DBConnector.executeQuery("SELECT * FROM student WHERE stu_id = '"+my_id+"'");
                                     JSONArray jsonArray = new JSONArray(result);
                                     for(int i = 0; i < jsonArray.length(); i++) {
                                         JSONObject jsonData = jsonArray.getJSONObject(i);
@@ -105,13 +115,13 @@ public class gift_item extends AppCompatActivity {
                                     new AlertDialog.Builder(gift_item.this)
                                             .setTitle("確定兌換")//設定視窗標題
                                             //.setIcon(R.mipmap.ic_launcher)//設定對話視窗圖示
-                                            .setMessage("確定要兌換"+name+"?\n"+"兌換禮品之後，將不在退還Venus Point呦!")//設定顯示的文字
+                                            .setMessage("確定要兌換"+name+"?\n"+"兌換禮品之後，將不在退還點數呦!\n獎品需在7日內換取")//設定顯示的文字
                                             .setNegativeButton("確定兌換",new DialogInterface.OnClickListener(){
                                                 @Override
                                                 public void onClick(DialogInterface dialog, int which) {
-                                                    delete.executeQuery("INSERT INTO gift_box (stu_id,gift_id,used) VALUES (1,"+gift_id+",'F')");
-                                                    update.executeQuery("student SET stu_point = '"+(point-coin)+"' WHERE stu_id = '1' ");
-                                                    delete.executeQuery("INSERT INTO gift_record (gift_id,stu_id,less_point,updated_at) VALUES ('"+gift_id+"','1','"+coin+"','"+str+"')");
+                                                    delete.executeQuery("INSERT INTO gift_box (stu_id,gift_id,used,updated_at) VALUES ('"+my_id+"',"+gift_id+",'F','"+str+"')");
+                                                    update.executeQuery("student SET stu_point = '"+(point-coin)+"' WHERE stu_id = '"+my_id+"' ");
+                                                    delete.executeQuery("INSERT INTO gift_record (gift_id,stu_id,less_point,updated_at) VALUES ('"+gift_id+"','"+my_id+"','"+coin+"','"+str+"')");
                                                     Intent intent = new Intent();
                                                     intent.setClass(gift_item.this,gift_box.class);
                                                     startActivity(intent);

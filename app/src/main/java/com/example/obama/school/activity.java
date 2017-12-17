@@ -223,7 +223,7 @@ public class activity extends AppCompatActivity {
                     Picasso.with(getContext())
                             .load(jsonData.getString("active_pic"))
                             .placeholder(R.drawable.giphy)
-                            .error(R.drawable.oops)
+                            .error(R.drawable.sad)
                             .resize(2000,2000)
                             .onlyScaleDown()
                             .into(pic);

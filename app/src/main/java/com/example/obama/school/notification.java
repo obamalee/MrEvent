@@ -14,6 +14,9 @@ import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -41,7 +44,16 @@ public class notification extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.notification);
 
-        //sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        ImageButton imageButton12 = (ImageButton) findViewById(R.id.imageButton12);
+        imageButton12.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                notification.this.finish();
+            }
+        });
+
+        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         //SharedPreferences.Editor editor = sharedpreferences.edit();
         //editor.putString(beacon_check, "0");
         //editor.commit();
@@ -74,7 +86,7 @@ public class notification extends AppCompatActivity {
     }
 
 
-    public void qqq(){
+    public void func(){
         mHandler = new Handler();
 
         bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
@@ -136,7 +148,7 @@ public class notification extends AppCompatActivity {
                         //SharedPreferences.Editor editor = sharedpreferences.edit();
                         case R.id.radioButton4:
                             Log.d("MainActivity", "onCreate call");
-                            qqq();
+                            func();
                             //啟動服務
                             Log.d("MainActivity","start");
                             //update beacon status to 1
@@ -156,6 +168,9 @@ public class notification extends AppCompatActivity {
                             editor1.commit();
                             //stop beacon server
                             Intent intent1 = new Intent(notification.this, MyService.class);
+                            stopService(intent1);
+                            stopService(intent1);
+                            stopService(intent1);
                             stopService(intent1);
                             break;
 

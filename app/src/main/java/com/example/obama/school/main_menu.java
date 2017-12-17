@@ -21,17 +21,23 @@ import android.widget.Toast;
 
 public class main_menu extends AppCompatActivity {
 
+
+
     private static final int PERMISSION_REQUEST_COARSE_LOCATION = 1;
     private BluetoothManager bluetoothManager;
     private BluetoothAdapter mBluetoothAdapter;
     private static final int REQUEST_ENABLE_BT = 1;
     private Handler mHandler;
-    private static final long SCAN_PERIOD = 30000; //10 seconds
+    private static final long SCAN_PERIOD = 1000; //1 seconds
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_menu);
+
+        Intent intent1 = new Intent(main_menu.this, NoteService.class);
+        startService(intent1);
 
         Log.d("MainActivity", "onCreate call");
         mHandler = new Handler();
@@ -53,6 +59,8 @@ public class main_menu extends AppCompatActivity {
             Intent enableBluetooth = new Intent(
                     BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableBluetooth, REQUEST_ENABLE_BT);
+            Intent intent = new Intent(main_menu.this, MyService.class);
+            startService(intent);
 
         } else {
             Log.d("MainActivity", "beacon start");

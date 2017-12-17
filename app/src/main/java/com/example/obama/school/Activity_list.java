@@ -3,7 +3,9 @@ package com.example.obama.school;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -31,16 +33,28 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Activity_list extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    //session
+    public static final String MyPREFERENCES = "MyPrefs" ;
+    public static String stu_id = "stu_idlKey";
+    SharedPreferences sharedpreferences;
 
     String type;
     String sql;
-
+    String my_id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
+
+        //抓取 mb_id
+        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        my_id = sharedpreferences.getString(stu_id, "F");
+        Log.v("23",my_id);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -161,7 +175,17 @@ public class Activity_list extends AppCompatActivity
             }
         });
 
-
+        Button button9 = (Button) findViewById(R.id.button9);
+        button9.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setAction(intent.ACTION_VIEW);
+                intent.setData(Uri.parse("http://cge.cycu.edu.tw/"));
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+        });
 
         Button button10 = (Button) findViewById(R.id.button10);
         button10.setOnClickListener(new Button.OnClickListener() {
@@ -199,16 +223,23 @@ public class Activity_list extends AppCompatActivity
             }
         }).start();*/
 
+        SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy-MM-dd");
+        Date curDate1 = new Date(System.currentTimeMillis()) ; // 獲取當前時間
+        final String str1 = formatter1.format(curDate1);
+
         if(type.equals("6"))
         {
-            sql = "SELECT * FROM active INNER JOIN note ON active.active_id = note.active_id INNER JOIN type ON active.active_type_id = type.active_type_id WHERE note.stu_id = '1'";
+            sql = "SELECT * FROM active INNER JOIN note ON active.active_id = note.active_id INNER JOIN type ON active.active_type_id = type.active_type_id WHERE note.stu_id = '"+my_id+"' " +
+                    "and active_ending >= '"+str1+"' ORDER BY active_ending ASC";
         }
         else if(type.equals("7"))
         {
-            sql = "SELECT * FROM type INNER JOIN active ON type.active_type_id = active.active_type_id WHERE hot = 'T'";
+            sql = "SELECT * FROM type INNER JOIN active ON type.active_type_id = active.active_type_id WHERE hot = 'T' " +
+                    "and active_ending >= '"+str1+"' ORDER BY active_ending ASC";
         }else
         {
-            sql = "SELECT * FROM type INNER JOIN active ON type.active_type_id = active.active_type_id WHERE active.active_type_id = '"+type+"'";
+            sql = "SELECT * FROM type INNER JOIN active ON type.active_type_id = active.active_type_id WHERE active.active_type_id = '"+type+"' " +
+                    "and active_ending >= '"+str1+"' ORDER BY active_ending ASC";
         }
 
        new TestAsyncTask1(this).execute(sql);
@@ -234,7 +265,7 @@ public class Activity_list extends AppCompatActivity
                 LinearLayout list_aaa = new LinearLayout(Activity_list.this);
                 list_aaa.setOrientation(LinearLayout.HORIZONTAL);
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                layoutParams.setMargins(0,40,0,0);
+                layoutParams.setMargins(0,40,0,10);
                 list_aaa.setOnClickListener(new Button.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -266,7 +297,7 @@ public class Activity_list extends AppCompatActivity
                             .resize(500, 580)
                             .onlyScaleDown()
                             .placeholder(R.drawable.giphy)
-                            .error(R.drawable.oops)
+                            .error(R.drawable.sad)
                             .into(acv_img);
 
 
@@ -298,7 +329,9 @@ public class Activity_list extends AppCompatActivity
                 TextView speaker = new TextView(Activity_list.this);
                 speaker.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT));
                 speaker.setPadding(0,0,0,0);
-                speaker.setText(jsonData.getString("active_performer"));
+                if(jsonData.getString("active_performer").equals("null")){
+                speaker.setText(" ");}
+                else {speaker.setText(jsonData.getString("active_performer"));}
                 speaker.setTextSize(18);
                 speaker.setTextColor(Color.GRAY);
 
@@ -332,7 +365,7 @@ public class Activity_list extends AppCompatActivity
                     @Override
                     public void run() {
                         try {
-                            String result1 = DBConnector.executeQuery("SELECT * FROM note INNER JOIN student ON note.stu_id = student.stu_id WHERE active_id= '" + active_id + "' AND note.stu_id = '1'");
+                            String result1 = DBConnector.executeQuery("SELECT * FROM note INNER JOIN student ON note.stu_id = student.stu_id WHERE active_id= '" + active_id + "' AND note.stu_id = '"+my_id+"'");
                             JSONArray jsonArray1 = new JSONArray(result1);
                             Message msg = mHandler.obtainMessage();
                             msg.what = 1;
@@ -351,16 +384,16 @@ public class Activity_list extends AppCompatActivity
                                     @Override
                                     public void run() {
                                         try {
-                                            String result1 = DBConnector.executeQuery("SELECT * FROM student INNER JOIN note ON student.stu_id = note.stu_id WHERE active_id= '" + active_id + "' AND note.stu_id = '1'");
+                                            String result1 = DBConnector.executeQuery("SELECT * FROM student INNER JOIN note ON student.stu_id = note.stu_id WHERE active_id= '" + active_id + "' AND note.stu_id = '"+my_id+"'");
                                             JSONArray jsonArray1 = new JSONArray(result1);
-                                            delete.executeQuery("DELETE FROM note WHERE active_id = " + active_id + " AND stu_id = '1'");
+                                            delete.executeQuery("DELETE FROM note WHERE active_id = " + active_id + " AND stu_id = '"+my_id+"'");
                                             Message msg = mHandler.obtainMessage();
                                             msg.what = 2;
                                             msg.sendToTarget();
 
                                         } catch (Exception e) {
 
-                                            delete.executeQuery("INSERT INTO note(stu_id,active_id) VALUES ('1'," + active_id + ")");
+                                            delete.executeQuery("INSERT INTO note(stu_id,active_id) VALUES ('"+my_id+"'," + active_id + ")");
                                             Message msg = mHandler.obtainMessage();
                                             msg.what = 1;
                                             msg.sendToTarget();

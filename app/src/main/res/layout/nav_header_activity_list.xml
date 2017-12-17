@@ -144,5 +144,5 @@
         android:textSize="20sp"
         android:layout_weight="1"
         android:textAlignment="center"
-        android:text="宸宇同學   你好" />
+        android:text="同學   你好" />
 </LinearLayout>

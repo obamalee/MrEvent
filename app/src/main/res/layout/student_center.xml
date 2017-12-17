@@ -30,7 +30,7 @@
                 android:layout_gravity="center"
                 android:background="@android:color/transparent"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/back" />
+                app:srcCompat="@drawable/back1" />
 
             <TextView
                 android:id="@+id/textView21"
@@ -66,7 +66,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/bottom_line_black"
                 android:paddingBottom="8dip"
-                android:text="HELLO!  李宸宇  同學"
+                android:text="HELLO!"
                 android:textAlignment="center"
                 android:textSize="22sp" />
         </LinearLayout>
@@ -80,7 +80,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1.13"
+            android:layout_weight="1.1"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -97,7 +97,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1.13"
+            android:layout_weight="1.1"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -113,7 +113,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1.13"
+            android:layout_weight="1.1"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -129,15 +129,26 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.85"
+            android:layout_weight="1.1"
+            android:gravity="center"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/button12"
-                android:layout_width="wrap_content"
+            <ImageButton
+                android:id="@+id/scan"
+                android:layout_width="320dip"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="scan" />
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/scan" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.85"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
         </LinearLayout>
 
 

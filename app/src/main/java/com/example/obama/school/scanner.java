@@ -1,7 +1,9 @@
 package com.example.obama.school;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -22,17 +24,24 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class scanner extends AppCompatActivity {
+    //session
+    public static final String MyPREFERENCES = "MyPrefs" ;
+    public static String stu_id = "stu_idlKey";
+    SharedPreferences sharedpreferences;
 
     private Activity mainactivity;
     private TextView scan_content;
 
     private Button submit;
-
+    String my_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.scanner);
+        //抓取 mb_id
+        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        my_id = sharedpreferences.getString(stu_id, "F");
 
 
         init_view();
@@ -85,9 +94,9 @@ public class scanner extends AppCompatActivity {
                                     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                                     Date curDate = new Date(System.currentTimeMillis()) ; // 獲取當前時間
                                     final String date = formatter.format(curDate);
-                                    delete.executeQuery("INSERT INTO point_record (stu_id,active_id,add_point,update_at) VALUES ('1','"+scanContent+"','5','"+date+"')");
-                                    delete.executeQuery("INSERT INTO proof (student_id,active_id) VALUES ('1','"+scanContent+"')");
-                                    update.executeQuery("student SET stu_point = stu_point+5 WHERE stu_id = 1");
+                                    delete.executeQuery("INSERT INTO point_record (stu_id,active_id,add_point,update_at) VALUES ('"+my_id+"','"+scanContent+"','5','"+date+"')");
+                                    delete.executeQuery("INSERT INTO proof (student_id,active_id) VALUES ('"+my_id+"','"+scanContent+"')");
+                                    update.executeQuery("student SET stu_point = stu_point+5 WHERE stu_id = '"+my_id+"' ");
                                     scanner.this.finish();
                                             }
                                         }.start();

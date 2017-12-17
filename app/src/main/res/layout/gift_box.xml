@@ -29,7 +29,7 @@
                 android:layout_gravity="center"
                 android:background="@android:color/transparent"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/back" />
+                app:srcCompat="@drawable/back1" />
 
             <TextView
                 android:id="@+id/textView21"

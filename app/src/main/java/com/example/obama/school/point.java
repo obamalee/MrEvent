@@ -3,6 +3,7 @@ package com.example.obama.school;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,11 +17,20 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class point extends AppCompatActivity {
+    //session
+    public static final String MyPREFERENCES = "MyPrefs" ;
+    public static String stu_id = "stu_idlKey";
+    SharedPreferences sharedpreferences;
 String sql;
+    String my_id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.point);
+
+        //抓取 mb_id
+        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        my_id = sharedpreferences.getString(stu_id, "F");
 
         ImageButton imageButton1 = (ImageButton) findViewById(R.id.imageButton1);
         imageButton1.setOnClickListener(new Button.OnClickListener() {
@@ -75,7 +85,7 @@ String sql;
             }
         });
 
-        sql = "SELECT * FROM student WHERE stu_id = '1'";
+        sql = "SELECT * FROM student WHERE stu_id = '"+my_id+"'";
         new TestAsyncTask1(this).execute(sql);
     }
 

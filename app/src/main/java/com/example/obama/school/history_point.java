@@ -2,6 +2,7 @@ package com.example.obama.school;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -27,15 +28,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class history_point extends AppCompatActivity {
+    //session
+    public static final String MyPREFERENCES = "MyPrefs" ;
+    public static String stu_id = "stu_idlKey";
+    SharedPreferences sharedpreferences;
 
     private TabLayout mTablayout;
     private ViewPager mViewPager;
     private List<PageView> pageList;
+    String my_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.history_point);
+
+        //抓取 mb_id
+        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        my_id = sharedpreferences.getString(stu_id, "F");
+
 
         initData();
         initView();
@@ -103,7 +114,7 @@ public class history_point extends AppCompatActivity {
             addView(view,layoutParams0);
 
             record_list = (LinearLayout)view.findViewById(R.id.record_list);
-            sql = "SELECT * FROM active INNER JOIN point_record ON active.active_id = point_record.active_id WHERE stu_id = '1' ORDER BY update_at DESC";
+            sql = "SELECT * FROM active INNER JOIN point_record ON active.active_id = point_record.active_id WHERE stu_id = '"+my_id+"' ORDER BY update_at DESC";
             new TestAsyncTask(context).execute(sql);
 
 
@@ -245,7 +256,7 @@ public class history_point extends AppCompatActivity {
             addView(view,layoutParams0);
 
             record_list = (LinearLayout)view.findViewById(R.id.record_list);
-            sql = "SELECT * FROM gift_record INNER JOIN gift ON gift_record.gift_id = gift.gift_id WHERE stu_id = '1' ORDER BY updated_at DESC";
+            sql = "SELECT * FROM gift_record INNER JOIN gift ON gift_record.gift_id = gift.gift_id WHERE stu_id = '"+my_id+"' ORDER BY updated_at DESC";
             new TestAsyncTask(context).execute(sql);
 
         }
