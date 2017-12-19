@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -111,6 +112,7 @@ public class activity extends AppCompatActivity {
         public PageOneView(Context context) {
             super(context);
             View view = LayoutInflater.from(context).inflate(R.layout.activity_intro, null);
+            LinearLayout.LayoutParams layoutParams0 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
             date = (TextView)view.findViewById(R.id.textView17);
             location = (TextView)view.findViewById(R.id.textView18);
             info = (TextView)view.findViewById(R.id.textView20);
@@ -118,7 +120,7 @@ public class activity extends AppCompatActivity {
             sql = "SELECT * FROM active WHERE active_id = '"+active_id+"'";
             new TestAsyncTask(context).execute(sql);
 
-            addView(view);
+            addView(view,layoutParams0);
         }
 
          public void findViews(String str){
@@ -224,7 +226,7 @@ public class activity extends AppCompatActivity {
                             .load(jsonData.getString("active_pic"))
                             .placeholder(R.drawable.giphy)
                             .error(R.drawable.sad)
-                            .resize(2000,2000)
+                            .resize(1500,1500)
                             .onlyScaleDown()
                             .into(pic);
 

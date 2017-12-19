@@ -88,7 +88,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="目前累積的V幣"
+                android:text="目前累積的 C 幣"
                 android:textAlignment="center"
                 android:textSize="18sp" />
         </LinearLayout>

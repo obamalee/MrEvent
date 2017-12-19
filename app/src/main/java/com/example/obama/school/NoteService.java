@@ -64,7 +64,7 @@ public class NoteService extends Service {
             //抓取 mb_id
             sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
             my_id = sharedpreferences.getString(stu_id, "F");
-        if(str.equals("07:00")) {
+        if(str.equals("08:00")) {
             new Thread() {
                 @Override
                 public void run() {
@@ -96,7 +96,7 @@ public class NoteService extends Service {
                                     .setTicker("MR.Event 喜愛活動通知") // 設置狀態列的顯示的資訊
                                     .setWhen(System.currentTimeMillis())// 設置時間發生時間
                                     .setAutoCancel(false) // 設置通知被使用者點擊後是否清除  //notification.flags = Notification.FLAG_AUTO_CANCEL;
-                                    .setContentTitle(jsonData.getString("active_name") + "將在今天舉行") // 設置下拉清單裡的標題
+                                    .setContentTitle("您的最愛："+jsonData.getString("active_name") + "將在今天舉行") // 設置下拉清單裡的標題
                                     .setContentText("將在" + jsonData.getString("location") + "舉行")// 設置上下文內容
                                     .setOngoing(true)      //true使notification變為ongoing，用戶不能手動清除// notification.flags = Notification.FLAG_ONGOING_EVENT; notification.flags = Notification.FLAG_NO_CLEAR;
                                     .setDefaults(Notification.DEFAULT_ALL) //使用所有默認值，比如聲音，震動，閃屏等等

@@ -199,10 +199,11 @@ public class student_center extends AppCompatActivity {
                 Log.d("MainActivity", "distance：" + distance);
 
 
+
                 //mBluetoothAdapter.startLeScan(mLeScanCallback);
 
 
-                //距離<5
+
                 if (major == 1 )
                 {
                     Intent intent = new Intent();
@@ -210,21 +211,6 @@ public class student_center extends AppCompatActivity {
                     startActivity(intent);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     scanLeDevice(false);
-
-                }else if(String.valueOf(major).equals(null))
-                {
-                    scanLeDevice(false);
-                    new AlertDialog.Builder(student_center.this)
-                            .setTitle("搜尋失敗")//設定視窗標題
-                            //.setIcon(R.mipmap.ic_launcher)//設定對話視窗圖示
-                            .setMessage("搜尋失敗，請在試一次")//設定顯示的文字
-                            .setPositiveButton("關閉視窗",new DialogInterface.OnClickListener(){
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-
-                                }
-                            })//設定結束的子視窗
-                            .show();//呈現對話視窗
 
                 }else
                     {
@@ -244,6 +230,21 @@ public class student_center extends AppCompatActivity {
                     }
 
 
+            }else
+            {
+                scanLeDevice(false);
+
+                new AlertDialog.Builder(student_center.this)
+                        .setTitle("搜尋失敗")//設定視窗標題
+                        //.setIcon(R.mipmap.ic_launcher)//設定對話視窗圖示
+                        .setMessage("搜尋失敗，請在試一次")//設定顯示的文字
+                        .setPositiveButton("關閉視窗",new DialogInterface.OnClickListener(){
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        })//設定結束的子視窗
+                        .show();//呈現對話視窗
             }
         }
     };

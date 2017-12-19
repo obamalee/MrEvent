@@ -66,7 +66,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1.15"
+            android:layout_weight="1.25"
             android:orientation="horizontal">
 
             <TextView
@@ -84,7 +84,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.8"
+            android:layout_weight="0.75"
             android:orientation="horizontal">
 
             <TextView
@@ -94,9 +94,10 @@
                 android:layout_marginLeft="10dip"
                 android:layout_weight="1"
                 android:text="詳細內容\n\n請詳閱以下說明及注意事項，確認同意再行兌換\n\n
-1.您可使用Venus Points兌換本商品之電子兌換券\n\n
-2.Venus Points一經使用，恕無法變更或取消，亦無法退還。\n\n
-3.兌換完成後，您可在[電子積點]>[禮物盒]內找到本電子兌換券。"
+1.您可使用 活動積點 兌換本商品之電子兌換券\n\n
+2.活動積點 一經使用，恕無法變更或取消，亦無法退還。\n\n
+3.兌換完成後，您可在[積點]>[禮物盒]內找到本電子兌換券。\n\n
+4.優惠券請於7天內兌換完成，逾期恕不受理"
                 android:textColor="#666666"
                 android:textSize="12sp" />
         </LinearLayout>

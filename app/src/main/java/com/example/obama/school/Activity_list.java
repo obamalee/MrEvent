@@ -452,6 +452,20 @@ public class Activity_list extends AppCompatActivity
             }
         } catch(Exception e) {
              Log.e("log_tag", e.toString());
+
+            TextView title_nothing = new TextView(Activity_list.this);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT);
+            layoutParams.setMargins(0,50,0,0);
+            title_nothing.setText("此類別暫時無任何活動");
+            title_nothing.setTextSize(18);
+            title_nothing.setTextColor(Color.GRAY);
+            title_nothing.setGravity(Gravity.CENTER_VERTICAL);
+            title_nothing.setGravity(Gravity.CENTER_HORIZONTAL);
+            layoutParams.gravity = Gravity.CENTER_HORIZONTAL;
+            layoutParams.gravity = Gravity.CENTER_VERTICAL;
+
+            list.addView(title_nothing,layoutParams);
+
         }
 
     }

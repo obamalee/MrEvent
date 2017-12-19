@@ -43,7 +43,7 @@
                 android:paddingBottom="8dip"
                 android:paddingLeft="10dip"
                 android:paddingTop="15dip"
-                android:text="|時間|："
+                android:text="｜時間｜"
                 android:textColor="#333333"
                 android:textSize="20sp" />
 
@@ -71,7 +71,7 @@
                 android:paddingBottom="8dip"
                 android:paddingLeft="10dip"
                 android:paddingTop="15dip"
-                android:text="|地點|："
+                android:text="｜地點｜"
                 android:textColor="#333333"
                 android:textSize="20sp" />
 
@@ -99,7 +99,7 @@
                 android:paddingBottom="10dip"
                 android:paddingLeft="10dip"
                 android:paddingTop="15dip"
-                android:text="|節目簡介|"
+                android:text="｜節目簡介｜"
                 android:textColor="#333333"
                 android:textSize="20sp" />
 
