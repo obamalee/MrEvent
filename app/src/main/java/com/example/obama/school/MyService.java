@@ -17,6 +17,7 @@ import android.os.Looper;
 import android.util.Log;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
@@ -132,7 +133,7 @@ public class MyService extends Service {
                     //mBluetoothAdapter.stopLeScan(mLeScanCallback);
                     mBluetoothAdapter.startLeScan(mLeScanCallback);
                 }
-            }, SCAN_PERIOD);
+            },1000);
             Log.d("MainActivity", "satrrrrrrrrr");
             //mBluetoothAdapter.startLeScan(mLeScanCallback);
         } else {
@@ -219,7 +220,6 @@ public class MyService extends Service {
                         @Override
                         public void run() {
                             try {
-
                                 String result = DBConnector.executeQuery("SELECT * FROM beacon WHERE beacon_num='"+major+"'");
 
 
@@ -260,7 +260,7 @@ public class MyService extends Service {
 
                                                 //Log.d("MainActivity","789:"+e.toString());
                                                 //insert
-                                            }catch (Exception e){
+                                            }catch (JSONException e){
                                                 // Log.e("log_tag", e.toString());
                                                 Log.d("MainActivity","456:"+e.toString());
                                                 //抓取 mb_id
@@ -338,7 +338,6 @@ public class MyService extends Service {
                                                         }
                                                     }
                                                 }.start();
-
                                             }
                                         }
                                     }.start();

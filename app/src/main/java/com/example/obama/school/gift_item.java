@@ -105,7 +105,7 @@ public class gift_item extends AppCompatActivity {
                                      Log.e("log_tag", e.toString());
                                 }
 
-                                if (point>coin)
+                                if (point>=coin)
                                 {
                                     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                                     Date curDate = new Date(System.currentTimeMillis()) ; // 獲取當前時間

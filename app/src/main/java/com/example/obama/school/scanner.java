@@ -42,6 +42,12 @@ public class scanner extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.scanner);
+
+        //檢查是否取得權限
+
+
+
+
         //抓取 mb_id
         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         my_id = sharedpreferences.getString(stu_id, "F");
@@ -123,7 +129,7 @@ public class scanner extends AppCompatActivity {
                         }
 
                     }catch (Exception e) {
-                        Log.e("log_tag", e.toString());
+                        Log.e("log_tag123", e.toString());
                     }
                 }
             }.start();

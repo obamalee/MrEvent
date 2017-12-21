@@ -10,6 +10,8 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -51,6 +53,17 @@ public class main_menu extends AppCompatActivity {
             Toast.makeText(this, "硬體不支援", Toast.LENGTH_SHORT).show();
             finish();
 
+        }
+
+        int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
+        //沒有權限時
+        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(main_menu.this,
+                    new String[]{Manifest.permission.CAMERA},
+                    1);
+        } else {
+            Toast.makeText(this, "已經拿到權限囉!", Toast.LENGTH_SHORT).show();
         }
 
         // 檢查手機是否開啟藍芽裝置

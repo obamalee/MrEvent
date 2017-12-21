@@ -25,7 +25,7 @@ public class student_center extends AppCompatActivity {
     private BluetoothAdapter mBluetoothAdapter;
     private static final int REQUEST_ENABLE_BT = 1;
     private Handler mHandler;
-    private static final long SCAN_PERIOD = 1000; //1 seconds
+    private static final long SCAN_PERIOD = 0; //1 seconds
 
 
 
@@ -83,15 +83,17 @@ public class student_center extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                Intent intent1 = new Intent(student_center.this, MyService.class);
+                stopService(intent1);
                 mHandler = new Handler();
                 bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
                 mBluetoothAdapter = bluetoothManager.getAdapter();
-                scanLeDevice(true);
+                 scanLeDevice(true);
 
-                //Intent intent = new Intent();
-                //intent.setClass(student_center.this, scanner.class);
-                //startActivity(intent);
-                //overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                /*Intent intent = new Intent();
+                intent.setClass(student_center.this, scanner.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);*/
             }
         });
 
@@ -104,22 +106,10 @@ public class student_center extends AppCompatActivity {
     private void scanLeDevice(final boolean enable) {
         if (enable) {
 
-            //Runnable showTime = new  Runnable(){
-            //   @Override
-            //   public void run() {
-            //       Log.d("MainActivity", "satrattttttt");
-            //mBluetoothAdapter.stopLeScan(mLeScanCallback);
-            //       mBluetoothAdapter.startLeScan(mLeScanCallback);
-            //       handler.postDelayed(this, 1000);
-            //   }
-
-            //};
-
             mHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     Log.d("MainActivity", "satrattttttt");
-                    //mBluetoothAdapter.stopLeScan(mLeScanCallback);
                     mBluetoothAdapter.startLeScan(mLeScanCallback);
                 }
             }, SCAN_PERIOD);
@@ -128,6 +118,8 @@ public class student_center extends AppCompatActivity {
         } else {
             Log.d("MainActivity", "stopppppp");
             mBluetoothAdapter.stopLeScan(mLeScanCallback);
+
+           // scanLeDevice(false);
 
         }
 
@@ -161,7 +153,7 @@ public class student_center extends AppCompatActivity {
 
             // 如果找到了的话
             if (patternFound) {
-
+                scanLeDevice(false);
                 //mBluetoothAdapter.stopLeScan(mLeScanCallback);
                 String asd = mBluetoothAdapter.getName();
                 Log.d("4564s5454",asd);
@@ -206,6 +198,7 @@ public class student_center extends AppCompatActivity {
 
                 if (major == 1 )
                 {
+                    scanLeDevice(false);
                     Intent intent = new Intent();
                     intent.setClass(student_center.this, scanner.class);
                     startActivity(intent);
@@ -214,12 +207,11 @@ public class student_center extends AppCompatActivity {
 
                 }else
                     {
-                        scanLeDevice(false);
 
                         new AlertDialog.Builder(student_center.this)
                                 .setTitle("搜尋失敗")//設定視窗標題
                                 //.setIcon(R.mipmap.ic_launcher)//設定對話視窗圖示
-                                .setMessage("搜尋失敗，請在試一次")//設定顯示的文字
+                                .setMessage("搜尋失敗，請在試一次，major error")//設定顯示的文字
                                 .setPositiveButton("關閉視窗",new DialogInterface.OnClickListener(){
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
@@ -227,12 +219,14 @@ public class student_center extends AppCompatActivity {
                                     }
                                 })//設定結束的子視窗
                                 .show();//呈現對話視窗
+
+                        scanLeDevice(false);
                     }
 
 
             }else
             {
-                scanLeDevice(false);
+
 
                 new AlertDialog.Builder(student_center.this)
                         .setTitle("搜尋失敗")//設定視窗標題
@@ -245,6 +239,8 @@ public class student_center extends AppCompatActivity {
                             }
                         })//設定結束的子視窗
                         .show();//呈現對話視窗
+
+                scanLeDevice(false);
             }
         }
     };
